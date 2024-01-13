@@ -1,6 +1,6 @@
 # OrbitRecharge
 
-Automatically recharge all items on ship when going into orbit.
+Automatically recharges all items on ship and in players' inventories when going into orbit.
 
 ## Installation
 
