@@ -66,6 +66,41 @@ namespace OrbitRecharge
                     }
                 }
             }
+
+
+            FlashlightItem[] flashlights = GameObject.FindObjectsOfType<FlashlightItem>();
+            foreach (var flashlight in flashlights)
+            {
+                try
+                {
+                    flashlight.SwitchFlashlight(false);
+                    flashlight.flashlightBulb.enabled = false;
+                    flashlight.flashlightBulbGlow.enabled = false;
+
+                    flashlight.isBeingUsed = false;
+                }
+                catch (Exception e)
+                {
+                    Plugin.logger.LogDebug("Failed to turn off flashlight");
+                    Plugin.logger.LogDebug(e);
+                    continue;
+                }
+
+            }
+
+            WalkieTalkie[] walkies = GameObject.FindObjectsOfType<WalkieTalkie>();
+            foreach (var walkie in walkies)
+            {
+                try
+                {
+                    walkie.SwitchWalkieTalkieOn(false);
+                }
+                catch
+                {
+                    Plugin.logger.LogDebug("Failed to turn off walkie");
+                    continue;
+                }
+            }
         }
     }
 }
