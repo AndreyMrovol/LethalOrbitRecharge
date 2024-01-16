@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -27,8 +28,10 @@ namespace OrbitRecharge
     public static class StartOfRound_SetShipReadyToLand_Patch
     {
 
-        private static void RechargeItem(GrabbableObject itemToCharge)
+        private static void RechargeItem(GrabbableObject itemToCharge, string playerHeldBy = "on ship")
         {
+            Plugin.logger.LogDebug($"Recharging {itemToCharge.itemProperties.itemName} ({playerHeldBy}) - {Math.Ceiling(itemToCharge.insertedBattery.charge) * 100}%");
+
             itemToCharge.insertedBattery = new Battery(false, 1f);
             itemToCharge.SyncBatteryServerRpc(100);
         }
@@ -51,13 +54,15 @@ namespace OrbitRecharge
             var Players = __instance.allPlayerScripts;
             foreach (var player in Players)
             {
-                GrabbableObject[] ItemsOnPlayer = player.GetComponentsInChildren<GrabbableObject>();
+                GrabbableObject[] ItemsOnPlayer = player.ItemSlots;
 
                 foreach (var item in ItemsOnPlayer)
                 {
+                    if (item == null) continue;
+
                     if (item.insertedBattery != null)
                     {
-                        RechargeItem(item);
+                        RechargeItem(item, player.name);
                     }
                 }
             }
