@@ -96,11 +96,11 @@
     <Target Name="SetPluginVersion" BeforeTargets="AddGeneratedFile" DependsOnTargets="MinVer">
         <PropertyGroup>
             <PlainVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)</PlainVersion>
-            <BepInExPluginVersion>2.0.0</BepInExPluginVersion>
+            <BepInExPluginVersion>$(PlainVersion)</BepInExPluginVersion>
         </PropertyGroup>
     </Target>
     
-    <Target Name="PackThunderstore" DependsOnTargets="SetPluginVersion;SaveVersionAndNameToFiles" AfterTargets="PostBuildEvent" Condition="$(Configuration) == 'Release'">
+    <Target Name="PackThunderstore" DependsOnTargets="SetPluginVersion" AfterTargets="PostBuildEvent" Condition="$(Configuration) == 'Release'">
         <MakeDir Directories="$(ProjectDir)../assets/bundles" Condition="!Exists('$(ProjectDir)../assets/bundles')" />
         
         <Exec Command="dotnet tcli build --config-path $(ProjectDir)../assets/thunderstore.toml --package-version $(PlainVersion)" />
@@ -110,9 +110,10 @@
         <Move SourceFiles="@(FilesToRename)" DestinationFiles="@(FilesToRename -&gt; Replace($(PlainVersion), $(MinVerVersion)))" />
     </Target>
     
-    <Target Name="PublishThunderstore" DependsOnTargets="SetPluginVersion;SaveVersionAndNameToFiles">
+    <Target Name="PublishThunderstore" DependsOnTargets="SetPluginVersion">
         <Exec Command="dotnet tcli publish --config-path $(ProjectDir)../assets/thunderstore.toml --file $(ProjectDir)dist/*-$(MinVerVersion).zip" />
     </Target>
+    
     
     <!-- <Target Name="ZipCurseForge" AfterTargets="PackThunderstore">
         <MakeDir Directories="$(ProjectDir)dist/output/" Condition="!Exists('$(ProjectDir)dist/output/')" />

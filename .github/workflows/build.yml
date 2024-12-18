@@ -43,3 +43,9 @@ jobs:
       - name: Build and pack solution
         run: |
           dotnet pack -c Release
+
+      - name: Upload Thunderstore artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thunderstore-build
+          path: ./*/dist/*.zip
