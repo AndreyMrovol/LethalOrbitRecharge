@@ -8,7 +8,7 @@ repository = "https://thunderstore.io"
 namespace = "mrov"
 name = "OrbitRecharge"
 description = "Automatically recharge all items on ship when going into orbit."
-websiteUrl = "https://github.com/AndreyMrovol/LethalMrovLib/"
+websiteUrl = "https://github.com/AndreyMrovol/LethalOrbitRecharge/"
 containsNsfwContent = false
 
 [package.dependencies]
