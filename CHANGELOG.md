@@ -1,3 +1,8 @@
+# 0.1.1
+
+- reduced the amount of logs
+- improved the performance
+
 # 0.1.0
 
 - fixed an issue where flashlights and walkie-talkies used by players would be turned off

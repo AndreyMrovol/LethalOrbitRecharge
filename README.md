@@ -1,18 +1,12 @@
 # OrbitRecharge
 
-Automatically recharges all items on ship and in players' inventories when going into orbit.
+Automatically recharges all items on ship when going into orbit.
 
-## Installation
+## Features
 
-Copy **`OrbitRecharge.dll`** to your BepInEx plugins folder.
-
-\- or -
-
-Install via r2modman.
-
-## License
-
-This project is licensed under [MIT License](https://github.com/AndreyMrovol/LethalOrbitRecharge/blob/main/LICENSE).
+- recharge items on the ship
+- automatically turn off flashlights, walkie-talkies and radar boosters
+- automatically refill spray cans and TZP's
 
 ## Credits
 
