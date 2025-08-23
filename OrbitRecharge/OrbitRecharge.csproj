@@ -15,6 +15,12 @@
         <PackageIcon>icon.png</PackageIcon>
 
         <RootNamespace>$(AssemblyName)</RootNamespace>
+
+        <BepInExPluginGuid>$(PackageId)</BepInExPluginGuid>
+        
+
+        <!-- https://spdx.org/licenses/ -->
+        <PackageLicenseExpression>CC-BY-NC-ND-4.0</PackageLicenseExpression>
     </PropertyGroup>
 
 
@@ -63,23 +69,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- this is not really required -->
-        <!-- <PackageReference Include="TeamBMX.LobbyCompatibility" Version="1.0.1" /> -->
-
-        <!-- <PackageReference Include="Evaisa.LethalLib" Version="0.16.0" /> -->
-
-        <!-- <Reference Include="MMHOOK_Assembly-CSharp"><HintPath>../lib/MMHOOK_Assembly-CSharp.dll</HintPath></Reference> -->
-
         <PackageReference Include="IAmBatby.LethalLevelLoader" Version="1.3.10" />
-
-        <!-- References with DownloadDetails -->
-        <!-- <Reference Include="LethalLevelLoader">
-            <HintPath>$(LibraryDirectory)/LethalLevelLoader.dll</HintPath>
-        </Reference> -->
-    
-        <Reference Include="OldLLLLib">
-            <HintPath>$(LibraryDirectory)/OldLLLLib.dll</HintPath>
-        </Reference>
     </ItemGroup>
 
 
@@ -113,17 +103,7 @@
     <Target Name="PublishThunderstore" DependsOnTargets="SetPluginVersion">
         <Exec Command="dotnet tcli publish --config-path $(ProjectDir)../assets/thunderstore.toml --file $(ProjectDir)dist/*-$(MinVerVersion).zip" />
     </Target>
-    
-    
-    <!-- <Target Name="ZipCurseForge" AfterTargets="PackThunderstore">
-        <MakeDir Directories="$(ProjectDir)dist/output/" Condition="!Exists('$(ProjectDir)dist/output/')" />
-        <Copy SourceFiles="$(ProjectDir)bin/Release/netstandard2.1/$(AssemblyName).dll" DestinationFiles="$(ProjectDir)dist/output/$(AssemblyName).dll" />
 
-        <ZipDirectory
-            SourceDirectory="$(ProjectDir)dist/output/"
-            DestinationFile="$(ProjectDir)dist/curseforge.zip"
-            Overwrite="true" />
-    </Target> -->
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
